@@ -1,7 +1,7 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 
-const dbPath = path.join(__dirname, 'notes.db');
+const dbPath = path.join(__dirname, '../db/notes.db');
 const db = new Database(dbPath);
 
 // Initialize database schema
