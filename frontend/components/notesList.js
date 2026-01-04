@@ -27,7 +27,7 @@ export function renderNotesList(notes, container, onEdit, onDelete) {
     container.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const noteId = e.target.dataset.id;
-            const note = notes.find(n => n.id == noteId);
+            const note = notes.find(n => n.id === parseInt(noteId, 10));
             if (note && onEdit) {
                 onEdit(note);
             }
