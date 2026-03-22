@@ -3,6 +3,13 @@ PRAGMA foreign_keys = ON;
 -- ============================
 -- NOTES
 -- ============================
+-- clear existing data
+DELETE FROM note_tags;
+DELETE FROM note_tasks;
+DELETE FROM notes;
+DELETE FROM tags;
+DELETE FROM tasks;
+
 INSERT INTO notes (id, title, content, created_date, modified_date)
 VALUES
     (1, 'Learn Node.js', 'Study event loop, async patterns, and module system', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

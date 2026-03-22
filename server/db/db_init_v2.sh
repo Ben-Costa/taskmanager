@@ -4,9 +4,9 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Script directory: $SCRIPT_DIR"
-DB_FILE="$SCRIPT_DIR/taskmanager.db"
-SCHEMA_FILE="$SCRIPT_DIR/schema.sql"
-SEED_FILE="$SCRIPT_DIR/seed.sql"
+DB_FILE="$SCRIPT_DIR/data/app.db"
+SCHEMA_FILE="$SCRIPT_DIR/seed/schema.sql"
+SEED_FILE="$SCRIPT_DIR/seed/seed.sql"
 
 echo "Initializing SQLite database..."
 
@@ -14,6 +14,13 @@ echo "Initializing SQLite database..."
 if [ -f "$DB_FILE" ]; then
     rm "$DB_FILE"
     echo "Removed existing $DB_FILE"
+fi
+
+# Ensure the data directory exists
+DATA_DIR="$(dirname "$DB_FILE")"
+if [ ! -d "$DATA_DIR" ]; then
+    mkdir -p "$DATA_DIR"
+    echo "Created data directory $DATA_DIR"
 fi
 
 # Create new DB and apply schema

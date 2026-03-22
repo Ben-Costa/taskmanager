@@ -1,6 +1,6 @@
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE notes (
+CREATE TABLE if not exists notes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
@@ -8,13 +8,13 @@ CREATE TABLE notes (
     modified_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE tags (
+CREATE TABLE if not exists tags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     created_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE tasks (
+CREATE TABLE if not exists tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT,
@@ -25,7 +25,7 @@ CREATE TABLE tasks (
     modified_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE note_tags (
+CREATE TABLE if not exists note_tags (
     note_id INTEGER,
     tag_id INTEGER,
     PRIMARY KEY (note_id, tag_id),
@@ -33,7 +33,7 @@ CREATE TABLE note_tags (
     FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
 
-CREATE TABLE note_tasks (
+CREATE TABLE if not exists note_tasks (
     note_id INTEGER,
     task_id INTEGER,
     PRIMARY KEY (note_id, task_id),
