@@ -13,6 +13,11 @@ const { create } = require('./notes');
 */
 
 module.exports = {
+    list(){
+        const stmt = db.prepare('SELECT * FROM tasks ORDER BY created_date DESC');
+        return stmt.all();
+    },
+
     getById(id){
         const stmt = db.prepare('SELECT * FROM tasks WHERE id = ?');
         return stmt.get(id);
@@ -35,6 +40,7 @@ module.exports = {
         stmt.run(id);
     },
 
+    // think this is not needed
     listByNotes(noteId){
         const stmt = db.prepare(`
             SELECT t.* FROM tasks t 
