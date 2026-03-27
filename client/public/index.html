@@ -1,11 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Task Manager</title>
-  <!-- <link rel="stylesheet" href="/src/styles/main.css"> -->
+  <meta charset="UTF-8" />
+  <title>Notebook App</title>
+  <link rel="stylesheet" href="../src/styles/styles.css" />
 </head>
 <body>
-  <div id="app"></div>
-  <script src="/src/app.js" type="module"></script>
+  <!-- Top menu -->
+  <header>
+    <div class="logo">Notebook App</div>
+    <nav>
+      <button>Home</button>
+      <button>Settings</button>
+      <button>Profile</button>
+    </nav>
+  </header>
+
+  <!-- Main layout: left 1/3, right 2/3 -->
+   <div class="layout">
+    <!-- Left Column: Search, Notes list, pagination, tags, create notebook -->
+     <aside>
+      <section class="note-search">
+        <input type="text" placeholder="Search notes..." />
+      </section>
+      <section class="notes-preview-list">
+        <!-- Dynamically populated list of note previews -->
+         <h2 class="section-title">Notes</h2>
+         <div class="notes-list">
+          <!-- Example note preview -->
+         </div>
+         <div class="pagination">
+           <button>Previous</button>
+           <span>Page 1 of 10</span>
+           <button>Next</button>
+          </div>
+      </section>
+
+      <section class="tags-section">
+        <h2 class="section-title">Tags</h2>
+        <div class="tags-list">
+          <!-- Dynamically populated list of tags -->
+        </div>
+      </section>
+
+      <section class="notebook-actions">
+        <h2 class="section-title">Notebook Actions</h2>
+        <button>Create Notebook</button>
+      </section>
+
+     </aside>
+    <!-- Right Column: Note details, edit form -->
+     <main class="note-view">
+      <header class="note-header">
+        <input type="text" id="note-title-input" class ="note-title-input" placeholder="Note Title" />
+        
+        <div class="note-actions">
+          <button id="edit-note-btn">Edit</button>
+          <button id="save-note-btn">Save</button>
+          <button id="delete-note-btn">Delete</button>
+        </div>
+      </header>
+
+      <section class="note-editor-section">
+        <textarea id="note-content-input" class="note-content-input" placeholder="Note Content"></textarea>
+      </section>
+
+      <section class="tasks-section">
+        <div class="tasks-header">
+          <h2 class="section-title">Tasks</h2>
+          <button id="add-task-btn">Add Task</button>
+        </div>
+        <div class="tasks-list" id="tasks-list">
+          <!-- Dynamically populated list of tasks -->
+      </section>
+     </main>
+   </div>
+
+  <script type="module" src="./app.js"></script>
 </body>
 </html>

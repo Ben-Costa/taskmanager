@@ -1,0 +1,50 @@
+ 6. Example model using better‑sqlite3
+This is the clean, low‑debt pattern you prefer:
+// models/notes.js
+const db = require('../db');
+
+module.exports = {
+  getAll() {
+    return db.prepare('SELECT * FROM notes').all();
+  },
+
+  getById(id) {
+    return db.prepare('SELECT * FROM notes WHERE id = ?').get(id);
+  },
+
+  create({ title, body }) {
+    const stmt = db.prepare(`
+      INSERT INTO notes (title, body)
+      VALUES (?, ?)
+    `);
+    const result = stmt.run(title, body);
+    return { id: result.lastInsertRowid, title, body };
+  }
+};
+
+
+
+🧩 7. Example route
+// routes/notes.js
+const express = require('express');
+const Notes = require('../models/notes');
+
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.json(Notes.getAll());
+});
+
+module.exports = router;
+
+
+
+🧪 8. Want to support SQLite ↔ PostgreSQL swapping?
+You’re already 80% of the way there.
+If you want, I can generate:
+- A DB adapter layer with a unified API
+- A schema-first Zod validation layer
+- A migration + seed system
+- A test harness that automatically uses :memory:
+- A Postgres adapter that mirrors the SQLite API
+Just tell me how deep you want to go.

@@ -1,0 +1,329 @@
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --shadow-grey:       #221d23ff;
+  --medium-slate-blue: #7161efff;
+  --bright-snow:       #fbfaf8ff;
+  --turquoise-surf:    #22aed1ff;
+  --tropical-teal:     #17bebbff;
+
+  --color-bg:              var(--shadow-grey);
+  --color-surface:         #2a2430;
+  --color-surface-raised:  #312838;
+
+  --color-primary:         var(--medium-slate-blue);
+  --color-primary-hover:   #8b7df2;
+  --color-accent:          var(--turquoise-surf);
+  --color-success:         var(--tropical-teal);
+
+  --color-text:            var(--bright-snow);
+  --color-text-muted:      rgba(251, 250, 248, 0.5);
+  --color-text-faint:      rgba(251, 250, 248, 0.25);
+
+  --color-border:          rgba(255, 255, 255, 0.07);
+  --color-border-emphasis: rgba(255, 255, 255, 0.15);
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --font-base: 'Inter', system-ui, sans-serif;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-lg:   18px;
+}
+
+
+/* ============================================================
+   RESET  — strips browser defaults so YOU control everything
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--text-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;          /* prevent body scroll; sections scroll internally */
+}
+
+
+/* ============================================================
+   LAYOUT  — the skeleton before any colors or details
+   ============================================================ */
+
+/* Full-height two-column split below the header */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;   /* left = 1/3, right = 2/3 */
+  flex: 1;                           /* fills remaining height under header */
+  overflow: hidden;
+}
+
+/* Left sidebar scrolls independently */
+aside {
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  overflow-y: auto;
+}
+
+/* Right panel scrolls independently */
+.note-view {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   HEADER  — top navigation bar
+   ============================================================ */
+header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-lg);
+  flex-shrink: 0;              /* never compress the header */
+}
+
+.logo {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+nav {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+
+/* ============================================================
+   BUTTONS  — one base style, variations via modifier classes
+   ============================================================ */
+button {
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-emphasis);
+  background-color: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+button:hover {
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-primary);
+}
+
+/* Primary action buttons (Save, Add Task) */
+#save-note-btn,
+#add-task-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--bright-snow);
+}
+
+#save-note-btn:hover,
+#add-task-btn:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+/* Destructive action (Delete) */
+#delete-note-btn {
+  border-color: rgba(255, 80, 80, 0.4);
+  color: #ff6b6b;
+}
+
+#delete-note-btn:hover {
+  background-color: rgba(255, 80, 80, 0.1);
+}
+
+
+/* ============================================================
+   INPUTS & TEXTAREA
+   ============================================================ */
+input[type="text"],
+textarea {
+  width: 100%;
+  font-family: var(--font-base);
+  font-size: var(--text-base);
+  background-color: var(--color-surface-raised);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-faint);
+}
+
+
+/* ============================================================
+   ASIDE SECTIONS
+   ============================================================ */
+.section-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+}
+
+.note-search input {
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* Individual tag pill — JS will create these later */
+.tag {
+  font-size: 11px;
+  padding: 2px var(--space-sm);
+  border-radius: 20px;
+  background-color: rgba(34, 174, 209, 0.15);
+  color: var(--color-accent);
+  border: 1px solid rgba(34, 174, 209, 0.25);
+}
+
+
+/* ============================================================
+   NOTE VIEW (right panel)
+   ============================================================ */
+.note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+  background-color: var(--color-surface);     /* override the body header rule */
+}
+
+.note-title-input {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: var(--space-xs) 0;
+  flex: 1;
+}
+
+.note-title-input:focus {
+  border-bottom-color: var(--color-primary);
+}
+
+.note-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+/* Editor grows to fill available space */
+.note-editor-section {
+  flex: 1;
+  display: flex;
+  padding: var(--space-lg);
+  overflow: hidden;
+}
+
+.note-content-input {
+  flex: 1;
+  resize: none;              /* no manual resize handle — it fills its container */
+  height: 100%;
+  line-height: 1.7;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.note-content-input:focus {
+  border-color: transparent;   /* editor feel: no visible box, just a cursor */
+}
+
+/* Tasks panel sits at the bottom of the right column */
+.tasks-section {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.tasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+/* Individual task row — JS will create these */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-item input[type="checkbox"] {
+  accent-color: var(--color-success);   /* tints the native checkbox */
+  width: 16px;
+  height: 16px;
+}
