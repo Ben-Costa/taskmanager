@@ -9,7 +9,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-//app.use('/api/v1/notes', require('./routes/notes'));
+
+//import all routes from routes folder and use them
+app.use('/api/v1/notes', require('./routes/notes'));
+app.use('/api/v1/tags', require('./routes/tags'));
+app.use('/api/v1/tasks', require('./routes/tasks'));
 
 app.get('/', (req, res) => {
   //query the database and print out all the notes to the web page
