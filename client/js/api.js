@@ -1,5 +1,5 @@
-import { USE_MOCK_AP, API_BASE_URL } from "./config";
-import { mockAPI } from "./mockApi";
+import { USE_MOCK_API, API_BASE_URL } from "./config.js";
+import { mockAPI } from "./mockAPI.js";
 
 // Initialize the application
 export function initApp() {
